@@ -6,8 +6,7 @@ let cookieParser = require("cookie-parser");
 let client_id = "d4f76ce0e8fe4aa6a762e15aadf3a5d6";
 let client_secret = "3764024b4ebd430d98caf76c0b528da7";
 let redirect_uri = "http://localhost:8888/callback";
-// let array = new Uint32Array(10);
-// let userCode = window.crypto.getRandomValues(array);
+let local_host_app = "http://localhost:3000/";
 
 let generateRandomString = function(length) {
   let text = "";
@@ -93,7 +92,7 @@ app.get("/callback", function(req, res) {
 
         // we can also pass the token to the browser to make requests from there
         res.redirect(
-          "/#" +
+          local_host_app +
             querystring.stringify({
               access_token: access_token,
               refresh_token: refresh_token
