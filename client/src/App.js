@@ -7,12 +7,12 @@ class App extends Component {
   state = {
     token: "",
     refreshToken: "",
-    user: []
+    user: [],
+    recentlyPlayed: []
   };
 
   getSpotifyToken = () => {
     const fragment = window.location.pathname;
-    console.log(fragment);
     if (fragment) {
       const match = fragment.match(/access_token=(.*)[(^&)]/);
       const refreshMatch = fragment.match(/refresh_token=(.*)/);
@@ -21,19 +21,18 @@ class App extends Component {
         const refreshToken = refreshMatch[1]
           .toString()
           .slice(refreshMatch[1] - 1);
-        console.log(token);
         this.setState(
           {
             token,
             refreshToken
           },
-          this.getSpotifyData(token)
+          this.getUserInfo(token)
         );
       }
     }
   };
 
-  getSpotifyData = token => {
+  getUserInfo = token => {
     fetch("https://api.spotify.com/v1/me", {
       method: "GET",
       headers: {
@@ -41,11 +40,46 @@ class App extends Component {
       }
     })
       .then(response => response.json())
-      .then(user => this.setState({ user: [user] }));
+      .then(user => this.setState({ user: [user] }))
+      .catch(error => console.log(error.message));
+    fetch("https://api.spotify.com/v1/me/player/recently-played", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    })
+      .then(response => response.json())
+      .then(data =>
+        this.setState({
+          recentlyPlayed: data.items
+        })
+      );
+    fetch("https://api.spotify.com/v1/me/playlists ", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    })
+      .then(response => response.json())
+      .then(data =>
+        this.setState({
+          playlist: data.items
+        })
+      );
+  };
+
+  getNewToken = () => {
+    fetch("http://localhost:8888/refresh_token", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + this.state.refreshToken
+      }
+    });
   };
 
   componentDidMount() {
     this.getSpotifyToken();
+    this.getNewToken();
   }
 
   render() {
@@ -63,6 +97,29 @@ class App extends Component {
               <p>{user.email}</p>
               <p>{user.followers.total}</p>
               <img src={user.images[0].url} />
+              {console.log(this.state.recentlyPlayed)}
+              {this.state.recentlyPlayed &&
+                this.state.recentlyPlayed.map(item => (
+                  <div>
+                    <h2>
+                      <img src={item.track.album.images[1].url} />
+                      {`Album: ${item.track.album.name}`}
+                    </h2>
+                    <h2>
+                      {item.track.artists.map(artist => `${artist.name} `)}
+                    </h2>
+                    <p>{item.track.name}</p>
+                    <audio src={item.track.preview_url} controls>
+                      <embed
+                        src={item.track.preview_url}
+                        width="300"
+                        height="90"
+                        loop="false"
+                        autostart="false"
+                      />
+                    </audio>
+                  </div>
+                ))}
             </div>
           ))}
       </div>

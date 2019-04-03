@@ -29,7 +29,8 @@ app
 app.get("/login", function(req, res) {
   let state = generateRandomString(16);
   res.cookie(stateKey, state);
-  let scope = "user-read-private user-read-email";
+  let scope =
+    "user-read-private user-read-email user-top-read user-read-recently-played user-library-read playlist-read-private user-read-playback-state user-read-currently-playing";
   res.redirect(
     "https://accounts.spotify.com/authorize?" +
       querystring.stringify({
@@ -75,17 +76,6 @@ app.get("/callback", function(req, res) {
       if (!error && response.statusCode === 200) {
         let access_token = body.access_token,
           refresh_token = body.refresh_token;
-
-        // let options = {
-        //   url: "https://api.spotify.com/v1/me",
-        //   headers: { Authorization: "Bearer " + access_token },
-        //   json: true
-        // };
-
-        // // use the access token to access the Spotify Web API
-        // request.get(options, function(error, response, body) {
-        //   console.log(body);
-        // });
 
         res.redirect(
           local_host_app +
