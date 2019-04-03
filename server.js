@@ -12,7 +12,6 @@ let generateRandomString = function(length) {
   let text = "";
   let possible =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
   for (let i = 0; i < length; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
@@ -20,7 +19,6 @@ let generateRandomString = function(length) {
 };
 
 let stateKey = "spotify_auth_state";
-
 let app = express();
 
 app
@@ -31,7 +29,6 @@ app
 app.get("/login", function(req, res) {
   let state = generateRandomString(16);
   res.cookie(stateKey, state);
-  // your application requests authorization
   let scope = "user-read-private user-read-email";
   res.redirect(
     "https://accounts.spotify.com/authorize?" +
@@ -79,18 +76,17 @@ app.get("/callback", function(req, res) {
         let access_token = body.access_token,
           refresh_token = body.refresh_token;
 
-        let options = {
-          url: "https://api.spotify.com/v1/me",
-          headers: { Authorization: "Bearer " + access_token },
-          json: true
-        };
+        // let options = {
+        //   url: "https://api.spotify.com/v1/me",
+        //   headers: { Authorization: "Bearer " + access_token },
+        //   json: true
+        // };
 
-        // use the access token to access the Spotify Web API
-        request.get(options, function(error, response, body) {
-          console.log(body);
-        });
+        // // use the access token to access the Spotify Web API
+        // request.get(options, function(error, response, body) {
+        //   console.log(body);
+        // });
 
-        // we can also pass the token to the browser to make requests from there
         res.redirect(
           local_host_app +
             querystring.stringify({
@@ -111,7 +107,6 @@ app.get("/callback", function(req, res) {
 });
 
 app.get("/refresh_token", function(req, res) {
-  // requesting access token from refresh token
   let refresh_token = req.query.refresh_token;
   let authOptions = {
     url: "https://accounts.spotify.com/api/token",
@@ -126,7 +121,6 @@ app.get("/refresh_token", function(req, res) {
     },
     json: true
   };
-
   request.post(authOptions, function(error, response, body) {
     if (!error && response.statusCode === 200) {
       let access_token = body.access_token;
@@ -137,5 +131,4 @@ app.get("/refresh_token", function(req, res) {
   });
 });
 
-console.log("Listening on 8888");
 app.listen(8888);

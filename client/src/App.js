@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
 
-const server = "http://localhost:8888/callback";
+const server = "http://localhost:8888/";
 
 class App extends Component {
   state = {
     token: "",
     refreshToken: "",
-    user: {}
+    user: []
   };
 
   getSpotifyToken = () => {
@@ -41,7 +41,7 @@ class App extends Component {
       }
     })
       .then(response => response.json())
-      .then(user => this.setState({ user }));
+      .then(user => this.setState({ user: [user] }));
   };
 
   componentDidMount() {
@@ -56,6 +56,15 @@ class App extends Component {
         </a>
         <p>{this.state.token}</p>
         <p>{this.state.refreshToken}</p>
+        {this.state.user &&
+          this.state.user.map(user => (
+            <div>
+              <h1>{user.display_name}</h1>
+              <p>{user.email}</p>
+              <p>{user.followers.total}</p>
+              <img src={user.images[0].url} />
+            </div>
+          ))}
       </div>
     );
   }
