@@ -107,10 +107,10 @@ class App extends Component {
             this.withoutDuplicates().map(item => (
               <div className="recently-played-container">
                 <div className="recently-played-imagebox">
-                  <h2>{`Album: ${item.track.album.name}`}</h2>
+                  <h2>{item.track.album.name}</h2>
                   <img src={item.track.album.images[1].url} />
                 </div>
-                <div>
+                <div className="recently-played-about">
                   <h2>{item.track.artists.map(artist => `${artist.name} `)}</h2>
                   <p>{item.track.name}</p>
                 </div>
