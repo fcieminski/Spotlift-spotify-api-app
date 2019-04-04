@@ -31,6 +31,54 @@ code {
     monospace;
 }
 
+section {
+  position: relative;
+
+  height: 300px;
+  overflow: hidden;
+}
+
+.playlist-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+}
+
+.playlist-box {
+  width: 250px;
+  height: 250px;
+}
+
+.playlist-image {
+  position: relative;
+}
+
+.playlist-image > img {
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.playlist-info {
+  transition: all 0.2s;
+  position: relative;
+  top: -150px;
+  left: 0;
+  text-align: center;
+  visibility: hidden;
+}
+
+.playlist-box:hover .playlist-info,
+.playlist-box:hover .playlist-image > img {
+  visibility: visible;
+}
+
+.playlist-info > a,
+.playlist-info > h2 {
+  color: white;
+  text-decoration: none;
+}
+
 main {
   display: flex;
   flex-wrap: wrap;

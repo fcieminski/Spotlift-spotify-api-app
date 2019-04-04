@@ -8,7 +8,8 @@ class App extends Component {
     token: "",
     refreshToken: "",
     user: [],
-    recentlyPlayed: []
+    recentlyPlayed: [],
+    playlists: []
   };
 
   getSpotifyToken = () => {
@@ -60,16 +61,17 @@ class App extends Component {
           recentlyPlayed: data.items
         })
       );
-    fetch("https://api.spotify.com/v1/me/playlists ", {
+    fetch("https://api.spotify.com/v1/me/playlists", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token
       }
     })
       .then(response => response.json())
+      // .then(data => Object.entries(data).map(({ id, value }) => [id, ...value]))
       .then(data =>
         this.setState({
-          playlist: data.items
+          playlists: data.items
         })
       );
   };
@@ -102,6 +104,24 @@ class App extends Component {
               <img src={user.images[0].url} />
             </div>
           ))} */}
+        <section>
+          <div className="playlist-slider">
+            {this.state.playlists &&
+              this.state.playlists.map(playlist => (
+                <div className="playlist-box">
+                  <div className="playlist-image">
+                    <img src={playlist.images[0].url} />
+                  </div>
+                  <div className="playlist-info">
+                    <a href={Object.values(playlist.external_urls)[0]}>
+                      {playlist.name}
+                    </a>
+                    <h2>{playlist.owner.display_name}</h2>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </section>
         <main>
           {this.state.recentlyPlayed &&
             this.withoutDuplicates().map(item => (
