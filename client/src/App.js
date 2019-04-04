@@ -8,7 +8,8 @@ class App extends Component {
     token: "",
     refreshToken: "",
     user: [],
-    recentlyPlayed: []
+    recentlyPlayed: [],
+    playlists: []
   };
 
   getSpotifyToken = () => {
@@ -39,7 +40,13 @@ class App extends Component {
         Authorization: "Bearer " + token
       }
     })
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return this.getNewToken();
+        }
+      })
       .then(user => this.setState({ user: [user] }))
       .catch(error => console.log(error.message));
     fetch("https://api.spotify.com/v1/me/player/recently-played", {
@@ -54,33 +61,31 @@ class App extends Component {
           recentlyPlayed: data.items
         })
       );
-    fetch("https://api.spotify.com/v1/me/playlists ", {
+    fetch("https://api.spotify.com/v1/me/playlists", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token
       }
     })
       .then(response => response.json())
+      // .then(data => Object.entries(data).map(({ id, value }) => [id, ...value]))
       .then(data =>
         this.setState({
-          playlist: data.items
+          playlists: data.items
         })
       );
   };
 
-  getNewToken = () => {
-    fetch("http://localhost:8888/refresh_token", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + this.state.refreshToken
-      }
-    });
-  };
-
   componentDidMount() {
     this.getSpotifyToken();
-    this.getNewToken();
   }
+
+  withoutDuplicates = () => {
+    return this.state.recentlyPlayed.filter(
+      (element, index, self) =>
+        self.map(item => item.track.name).indexOf(element.track.name) === index
+    );
+  };
 
   render() {
     return (
@@ -90,38 +95,55 @@ class App extends Component {
         </a>
         <p>{this.state.token}</p>
         <p>{this.state.refreshToken}</p>
-        {this.state.user &&
+        {/* {this.state.user &&
           this.state.user.map(user => (
             <div>
               <h1>{user.display_name}</h1>
               <p>{user.email}</p>
               <p>{user.followers.total}</p>
               <img src={user.images[0].url} />
-              {console.log(this.state.recentlyPlayed)}
-              {this.state.recentlyPlayed &&
-                this.state.recentlyPlayed.map(item => (
-                  <div>
-                    <h2>
-                      <img src={item.track.album.images[1].url} />
-                      {`Album: ${item.track.album.name}`}
-                    </h2>
-                    <h2>
-                      {item.track.artists.map(artist => `${artist.name} `)}
-                    </h2>
-                    <p>{item.track.name}</p>
-                    <audio src={item.track.preview_url} controls>
-                      <embed
-                        src={item.track.preview_url}
-                        width="300"
-                        height="90"
-                        loop="false"
-                        autostart="false"
-                      />
-                    </audio>
-                  </div>
-                ))}
             </div>
-          ))}
+          ))} */}
+        <section>
+          <div className="playlist-slider">
+            {this.state.playlists &&
+              this.state.playlists.map(playlist => (
+                <div className="playlist-box">
+                  <div className="playlist-image">
+                    <img src={playlist.images[0].url} />
+                  </div>
+                  <div className="playlist-info">
+                    <a href={Object.values(playlist.external_urls)[0]}>
+                      {playlist.name}
+                    </a>
+                    <h2>{playlist.owner.display_name}</h2>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </section>
+        <main>
+          {this.state.recentlyPlayed &&
+            this.withoutDuplicates().map(item => (
+              <div className="recently-played-container">
+                <div className="recently-played-imagebox">
+                  <h2>{item.track.album.name}</h2>
+                  <img src={item.track.album.images[1].url} />
+                </div>
+                <div className="recently-played-about">
+                  <h2>{item.track.artists.map(artist => `${artist.name} `)}</h2>
+                  <p>{item.track.name}</p>
+                </div>
+                <audio src={item.track.preview_url} controls>
+                  <embed
+                    src={item.track.preview_url}
+                    loop="false"
+                    autostart="false"
+                  />
+                </audio>
+              </div>
+            ))}
+        </main>
       </div>
     );
   }

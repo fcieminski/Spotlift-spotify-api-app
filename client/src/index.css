@@ -1,4 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+img {
+  max-width: 100%;
+}
+
+h2 {
+  font-size: 13px;
+  margin-bottom: 10px;
+  margin: 0;
+}
+
+p {
+  font-size: 15px;
+}
+
 body {
+  background-color: #282828;
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -11,4 +29,106 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+section {
+  position: relative;
+
+  height: 300px;
+  overflow: hidden;
+}
+
+.playlist-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+}
+
+.playlist-box {
+  width: 250px;
+  height: 250px;
+}
+
+.playlist-image {
+  position: relative;
+}
+
+.playlist-image > img {
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.playlist-info {
+  transition: all 0.2s;
+  position: relative;
+  top: -150px;
+  left: 0;
+  text-align: center;
+  visibility: hidden;
+}
+
+.playlist-box:hover .playlist-info,
+.playlist-box:hover .playlist-image > img {
+  visibility: visible;
+}
+
+.playlist-info > a,
+.playlist-info > h2 {
+  color: white;
+  text-decoration: none;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.recently-played-container {
+  transition: all 0.2s;
+  background-color: rgb(238, 238, 238);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 10px;
+  border: 1px solid rgb(221, 221, 221);
+  box-shadow: 5px 2px 11px -8px rgba(0, 0, 0, 0.75);
+  border-radius: 5px;
+}
+
+.recently-played-container:hover {
+  background-color: rgb(206, 206, 206);
+}
+
+.recently-played-imagebox {
+  display: flex;
+  flex-direction: column;
+}
+
+.recently-played-imagebox > img {
+  border: 1px solid rgb(221, 221, 221);
+}
+
+.recently-played-imagebox > h2 {
+  margin-bottom: 10px;
+}
+
+.recently-played-about > h2 {
+  font-size: 16px;
+  margin: 10px 0 10px 0;
+}
+
+.recently-played-about > p {
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+audio {
+  margin-bottom: 10px;
+  width: 100%;
 }
