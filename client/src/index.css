@@ -1,3 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+img {
+  max-width: 100%;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+p {
+  font-size: 16px;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -11,4 +26,26 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+main {
+  display: grid;
+  max-width: 978px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-rows: repeat(5, minmax(300px, 1fr));
+  grid-auto-flow: column;
+  margin: 0 auto;
+}
+
+.recently-played-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.recently-played-imagebox {
+  display: flex;
+  flex-direction: column;
 }
