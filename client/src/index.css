@@ -33,12 +33,33 @@ code {
 
 section {
   position: relative;
-
-  height: 300px;
+  height: 250px;
+  margin-bottom: 10vh;
   overflow: hidden;
 }
 
+.move-slider {
+  color: white;
+  font-size: 3rem;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.slider-controls {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.header-text {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: white;
+  text-align: center;
+}
+
 .playlist-slider {
+  transition: all 0.2s;
   position: absolute;
   top: 0;
   left: 0;
@@ -54,13 +75,23 @@ section {
   position: relative;
 }
 
+.playlist-image::after {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 0;
+  height: 250px;
+  transition: all 0.5s;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.404), rgba(0, 0, 0, 0.404));
+}
+
 .playlist-image > img {
-  transition: all 0.2s;
   width: 100%;
 }
 
 .playlist-info {
-  transition: all 0.2s;
   position: relative;
   top: -150px;
   left: 0;
@@ -68,8 +99,12 @@ section {
   visibility: hidden;
 }
 
-.playlist-box:hover .playlist-info,
-.playlist-box:hover .playlist-image > img {
+.playlist-box:hover .playlist-image::after {
+  transition: all 0.5s;
+  width: 450px;
+}
+
+.playlist-box:hover .playlist-info {
   visibility: visible;
 }
 
@@ -77,6 +112,13 @@ section {
 .playlist-info > h2 {
   color: white;
   text-decoration: none;
+}
+
+.playlist-info > a {
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+  display: inline-block;
+  border-bottom: 2px solid rgb(216, 216, 216);
 }
 
 main {

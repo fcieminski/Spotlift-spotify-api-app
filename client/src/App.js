@@ -9,7 +9,8 @@ class App extends Component {
     refreshToken: "",
     user: [],
     recentlyPlayed: [],
-    playlists: []
+    playlists: [],
+    sliderPosition: 0
   };
 
   getSpotifyToken = () => {
@@ -87,6 +88,29 @@ class App extends Component {
     );
   };
 
+  moveSliderLeft = () => {
+    const elementToSlide = document.querySelector(".playlist-slider");
+    const sliderContainer = document.querySelector(".slider-container");
+    let sectionWidth = -sliderContainer.clientWidth;
+    let i = window.innerWidth * 0.1;
+    if (this.state.sliderPosition > sectionWidth) {
+      this.setState({
+        sliderPosition: this.state.sliderPosition - i
+      });
+      elementToSlide.style.left = `${this.state.sliderPosition}px`;
+    }
+  };
+
+  moveSliderRight = () => {
+    const elementToSlide = document.querySelector(".playlist-slider");
+    if (this.state.sliderPosition < 0) {
+      this.setState({
+        sliderPosition: 0
+      });
+    }
+    elementToSlide.style.left = `${this.state.sliderPosition}px`;
+  };
+
   render() {
     return (
       <div>
@@ -104,14 +128,26 @@ class App extends Component {
               <img src={user.images[0].url} />
             </div>
           ))} */}
-        <section>
-          <div className="playlist-slider">
+        <div className="slider-controls">
+          <p onClick={this.moveSliderRight} className="move-slider">
+            {`<`}{" "}
+          </p>
+          <h2 className="header-text">Your Playlists</h2>
+          <p onClick={this.moveSliderLeft} className="move-slider">
+            {" "}
+            >
+          </p>
+        </div>
+        <section className="slider-container">
+          <div style={{ left: "0px" }} className="playlist-slider">
             {this.state.playlists &&
               this.state.playlists.map(playlist => (
                 <div className="playlist-box">
-                  <div className="playlist-image">
-                    <img src={playlist.images[0].url} />
-                  </div>
+                  <a href={Object.values(playlist.external_urls)[0]}>
+                    <div className="playlist-image">
+                      <img src={playlist.images[0].url} />
+                    </div>
+                  </a>
                   <div className="playlist-info">
                     <a href={Object.values(playlist.external_urls)[0]}>
                       {playlist.name}
