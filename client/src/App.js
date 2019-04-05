@@ -9,7 +9,8 @@ class App extends Component {
     refreshToken: "",
     user: [],
     recentlyPlayed: [],
-    playlists: []
+    playlists: [],
+    sliderPosition: 0
   };
 
   getSpotifyToken = () => {
@@ -87,6 +88,17 @@ class App extends Component {
     );
   };
 
+  moveSliderLeft = () => {
+    const elementToSlide = document.querySelector(".playlist-slider");
+    let i = window.innerWidth * 0.1;
+    if (this.state.sliderPosition > -3500) {
+      this.setState({
+        sliderPosition: this.state.sliderPosition - i
+      });
+      elementToSlide.style.left = `${this.state.sliderPosition}px`;
+    }
+  };
+
   render() {
     return (
       <div>
@@ -104,14 +116,24 @@ class App extends Component {
               <img src={user.images[0].url} />
             </div>
           ))} */}
+        <div className="slider-controls">
+          <p className="move-slider">{`<`} </p>
+          <h2 className="header-text">Your Playlists</h2>
+          <p onClick={this.moveSliderLeft} className="move-slider">
+            {" "}
+            >
+          </p>
+        </div>
         <section>
-          <div className="playlist-slider">
+          <div style={{ left: "0px" }} className="playlist-slider">
             {this.state.playlists &&
               this.state.playlists.map(playlist => (
                 <div className="playlist-box">
-                  <div className="playlist-image">
-                    <img src={playlist.images[0].url} />
-                  </div>
+                  <a href={Object.values(playlist.external_urls)[0]}>
+                    <div className="playlist-image">
+                      <img src={playlist.images[0].url} />
+                    </div>
+                  </a>
                   <div className="playlist-info">
                     <a href={Object.values(playlist.external_urls)[0]}>
                       {playlist.name}
