@@ -90,13 +90,25 @@ class App extends Component {
 
   moveSliderLeft = () => {
     const elementToSlide = document.querySelector(".playlist-slider");
+    const sliderContainer = document.querySelector(".slider-container");
+    let sectionWidth = -sliderContainer.clientWidth;
     let i = window.innerWidth * 0.1;
-    if (this.state.sliderPosition > -3500) {
+    if (this.state.sliderPosition > sectionWidth) {
       this.setState({
         sliderPosition: this.state.sliderPosition - i
       });
       elementToSlide.style.left = `${this.state.sliderPosition}px`;
     }
+  };
+
+  moveSliderRight = () => {
+    const elementToSlide = document.querySelector(".playlist-slider");
+    if (this.state.sliderPosition < 0) {
+      this.setState({
+        sliderPosition: 0
+      });
+    }
+    elementToSlide.style.left = `${this.state.sliderPosition}px`;
   };
 
   render() {
@@ -117,14 +129,16 @@ class App extends Component {
             </div>
           ))} */}
         <div className="slider-controls">
-          <p className="move-slider">{`<`} </p>
+          <p onClick={this.moveSliderRight} className="move-slider">
+            {`<`}{" "}
+          </p>
           <h2 className="header-text">Your Playlists</h2>
           <p onClick={this.moveSliderLeft} className="move-slider">
             {" "}
             >
           </p>
         </div>
-        <section>
+        <section className="slider-container">
           <div style={{ left: "0px" }} className="playlist-slider">
             {this.state.playlists &&
               this.state.playlists.map(playlist => (

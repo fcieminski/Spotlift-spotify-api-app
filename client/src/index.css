@@ -59,6 +59,7 @@ section {
 }
 
 .playlist-slider {
+  transition: all 0.2s;
   position: absolute;
   top: 0;
   left: 0;
