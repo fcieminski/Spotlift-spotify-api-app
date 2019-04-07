@@ -9,7 +9,7 @@ class App extends Component {
     refreshToken: "",
     user: [],
     recentlyPlayed: [],
-    playlists: [],
+    playlists: null,
     sliderPosition: 0
   };
 
@@ -69,7 +69,6 @@ class App extends Component {
       }
     })
       .then(response => response.json())
-      // .then(data => Object.entries(data).map(({ id, value }) => [id, ...value]))
       .then(data =>
         this.setState({
           playlists: data.items
@@ -88,27 +87,26 @@ class App extends Component {
     );
   };
 
-  moveSliderLeft = () => {
+  moveSliderRight = () => {
     const elementToSlide = document.querySelector(".playlist-slider");
-    const sliderContainer = document.querySelector(".slider-container");
-    let sectionWidth = -sliderContainer.clientWidth;
-    let i = window.innerWidth * 0.1;
+    let sectionWidth = -elementToSlide.clientWidth;
     if (this.state.sliderPosition > sectionWidth) {
+      let i = window.innerWidth * 0.1;
+      elementToSlide.style.left = `${this.state.sliderPosition - i}px`;
       this.setState({
         sliderPosition: this.state.sliderPosition - i
       });
-      elementToSlide.style.left = `${this.state.sliderPosition}px`;
     }
   };
 
-  moveSliderRight = () => {
+  moveSliderLeft = () => {
     const elementToSlide = document.querySelector(".playlist-slider");
     if (this.state.sliderPosition < 0) {
+      elementToSlide.style.left = "0px";
       this.setState({
         sliderPosition: 0
       });
     }
-    elementToSlide.style.left = `${this.state.sliderPosition}px`;
   };
 
   render() {
@@ -128,16 +126,18 @@ class App extends Component {
               <img src={user.images[0].url} />
             </div>
           ))} */}
-        <div className="slider-controls">
-          <p onClick={this.moveSliderRight} className="move-slider">
-            {`<`}{" "}
-          </p>
-          <h2 className="header-text">Your Playlists</h2>
-          <p onClick={this.moveSliderLeft} className="move-slider">
-            {" "}
-            >
-          </p>
-        </div>
+        {this.state.playlists && (
+          <div className="slider-controls">
+            <p onClick={this.moveSliderLeft} className="move-slider">
+              {`<`}{" "}
+            </p>
+            <h2 className="header-text">Your Playlists</h2>
+            <p onClick={this.moveSliderRight} className="move-slider">
+              {" "}
+              >
+            </p>
+          </div>
+        )}
         <section className="slider-container">
           <div style={{ left: "0px" }} className="playlist-slider">
             {this.state.playlists &&
@@ -158,6 +158,7 @@ class App extends Component {
               ))}
           </div>
         </section>
+
         <main>
           {this.state.recentlyPlayed &&
             this.withoutDuplicates().map(item => (

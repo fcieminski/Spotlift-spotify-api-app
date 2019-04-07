@@ -141,6 +141,8 @@ main {
   border: 1px solid rgb(221, 221, 221);
   box-shadow: 5px 2px 11px -8px rgba(0, 0, 0, 0.75);
   border-radius: 5px;
+  max-width: 340px;
+  width: 100%;
 }
 
 .recently-played-container:hover {
