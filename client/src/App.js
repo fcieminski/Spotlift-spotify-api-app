@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import arrow from "./img/arrow.png";
 
 const server = "http://localhost:8888/";
 
@@ -9,7 +10,7 @@ class App extends Component {
     refreshToken: "",
     user: [],
     recentlyPlayed: [],
-    playlists: [],
+    playlists: null,
     sliderPosition: 0
   };
 
@@ -69,7 +70,6 @@ class App extends Component {
       }
     })
       .then(response => response.json())
-      // .then(data => Object.entries(data).map(({ id, value }) => [id, ...value]))
       .then(data =>
         this.setState({
           playlists: data.items
@@ -88,56 +88,48 @@ class App extends Component {
     );
   };
 
-  moveSliderLeft = () => {
+  moveSliderRight = () => {
     const elementToSlide = document.querySelector(".playlist-slider");
-    const sliderContainer = document.querySelector(".slider-container");
-    let sectionWidth = -sliderContainer.clientWidth;
-    let i = window.innerWidth * 0.1;
-    if (this.state.sliderPosition > sectionWidth) {
+    const allPlaylistsBoxes = document.querySelectorAll(".playlist-box");
+    const onePlaylistBox = document.querySelector(".playlist-box").clientWidth;
+    if (this.state.sliderPosition < allPlaylistsBoxes.length - 1) {
+      elementToSlide.style.left = `${parseInt(elementToSlide.style.left) -
+        onePlaylistBox}px`;
       this.setState({
-        sliderPosition: this.state.sliderPosition - i
+        sliderPosition: (this.state.sliderPosition += 1)
       });
-      elementToSlide.style.left = `${this.state.sliderPosition}px`;
     }
   };
 
-  moveSliderRight = () => {
+  moveSliderLeft = () => {
     const elementToSlide = document.querySelector(".playlist-slider");
-    if (this.state.sliderPosition < 0) {
+    if (this.state.sliderPosition > 0) {
+      elementToSlide.style.left = "0px";
       this.setState({
         sliderPosition: 0
       });
     }
-    elementToSlide.style.left = `${this.state.sliderPosition}px`;
   };
 
   render() {
     return (
       <div>
-        <a href="http://localhost:8888/login">
-          <button>Log in with Spotify</button>
-        </a>
-        <p>{this.state.token}</p>
-        <p>{this.state.refreshToken}</p>
-        {/* {this.state.user &&
-          this.state.user.map(user => (
-            <div>
-              <h1>{user.display_name}</h1>
-              <p>{user.email}</p>
-              <p>{user.followers.total}</p>
-              <img src={user.images[0].url} />
-            </div>
-          ))} */}
-        <div className="slider-controls">
-          <p onClick={this.moveSliderRight} className="move-slider">
-            {`<`}{" "}
-          </p>
-          <h2 className="header-text">Your Playlists</h2>
-          <p onClick={this.moveSliderLeft} className="move-slider">
-            {" "}
-            >
-          </p>
-        </div>
+        <nav>
+          <a href="http://localhost:8888/login">
+            <button>Log in with Spotify</button>
+          </a>
+        </nav>
+        {this.state.playlists && (
+          <div className="slider-controls">
+            <button onClick={this.moveSliderLeft} className="move-slider">
+              <img src={arrow} />
+            </button>
+            <h2 className="header-text">Your Playlists</h2>
+            <button onClick={this.moveSliderRight} className="move-slider">
+              <img id="rotate" src={arrow} />
+            </button>
+          </div>
+        )}
         <section className="slider-container">
           <div style={{ left: "0px" }} className="playlist-slider">
             {this.state.playlists &&
@@ -158,6 +150,7 @@ class App extends Component {
               ))}
           </div>
         </section>
+        <h2 className="header-text">Recently played</h2>
         <main>
           {this.state.recentlyPlayed &&
             this.withoutDuplicates().map(item => (
