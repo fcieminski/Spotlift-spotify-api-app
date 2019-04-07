@@ -88,20 +88,22 @@ class App extends Component {
   };
 
   moveSliderRight = () => {
+    const container = document.querySelector(".slider-container");
     const elementToSlide = document.querySelector(".playlist-slider");
-    let sectionWidth = -elementToSlide.clientWidth;
-    if (this.state.sliderPosition > sectionWidth) {
-      let i = window.innerWidth * 0.1;
-      elementToSlide.style.left = `${this.state.sliderPosition - i}px`;
+    const allPlaylistsBoxes = document.querySelectorAll(".playlist-box");
+    const onePlaylistBox = document.querySelector(".playlist-box").clientWidth;
+    if (this.state.sliderPosition < allPlaylistsBoxes.length - 1) {
+      elementToSlide.style.left = `${parseInt(elementToSlide.style.left) -
+        onePlaylistBox}px`;
       this.setState({
-        sliderPosition: this.state.sliderPosition - i
+        sliderPosition: (this.state.sliderPosition += 1)
       });
     }
   };
 
   moveSliderLeft = () => {
     const elementToSlide = document.querySelector(".playlist-slider");
-    if (this.state.sliderPosition < 0) {
+    if (this.state.sliderPosition > 0) {
       elementToSlide.style.left = "0px";
       this.setState({
         sliderPosition: 0
