@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import arrow from "./img/arrow.png";
 
 const server = "http://localhost:8888/";
 
@@ -88,7 +89,6 @@ class App extends Component {
   };
 
   moveSliderRight = () => {
-    const container = document.querySelector(".slider-container");
     const elementToSlide = document.querySelector(".playlist-slider");
     const allPlaylistsBoxes = document.querySelectorAll(".playlist-box");
     const onePlaylistBox = document.querySelector(".playlist-box").clientWidth;
@@ -114,30 +114,20 @@ class App extends Component {
   render() {
     return (
       <div>
-        <a href="http://localhost:8888/login">
-          <button>Log in with Spotify</button>
-        </a>
-        <p>{this.state.token}</p>
-        <p>{this.state.refreshToken}</p>
-        {/* {this.state.user &&
-          this.state.user.map(user => (
-            <div>
-              <h1>{user.display_name}</h1>
-              <p>{user.email}</p>
-              <p>{user.followers.total}</p>
-              <img src={user.images[0].url} />
-            </div>
-          ))} */}
+        <nav>
+          <a href="http://localhost:8888/login">
+            <button>Log in with Spotify</button>
+          </a>
+        </nav>
         {this.state.playlists && (
           <div className="slider-controls">
-            <p onClick={this.moveSliderLeft} className="move-slider">
-              {`<`}{" "}
-            </p>
+            <button onClick={this.moveSliderLeft} className="move-slider">
+              <img src={arrow} />
+            </button>
             <h2 className="header-text">Your Playlists</h2>
-            <p onClick={this.moveSliderRight} className="move-slider">
-              {" "}
-              >
-            </p>
+            <button onClick={this.moveSliderRight} className="move-slider">
+              <img id="rotate" src={arrow} />
+            </button>
           </div>
         )}
         <section className="slider-container">
@@ -160,7 +150,7 @@ class App extends Component {
               ))}
           </div>
         </section>
-
+        <h2 className="header-text">Recently played</h2>
         <main>
           {this.state.recentlyPlayed &&
             this.withoutDuplicates().map(item => (
