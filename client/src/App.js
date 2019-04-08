@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
-import arrow from "./img/arrow.png";
+import arrowNext from "./img/forward.svg";
+import arrowBack from "./img/backward.svg";
 
 const server = "http://localhost:8888/";
 
@@ -9,7 +10,7 @@ class App extends Component {
     token: "",
     refreshToken: "",
     user: [],
-    recentlyPlayed: [],
+    recentlyPlayed: null,
     playlists: null,
     sliderPosition: 0
   };
@@ -119,16 +120,46 @@ class App extends Component {
             <button>Log in with Spotify</button>
           </a>
         </nav>
-        {this.state.playlists && (
+        {this.state.playlists ? (
           <div className="slider-controls">
             <button onClick={this.moveSliderLeft} className="move-slider">
-              <img src={arrow} />
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                data-prefix="fas"
+                data-icon="backward"
+                class="svg-inline--fa fa-backward fa-w-16"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M11.5 280.6l192 160c20.6 17.2 52.5 2.8 52.5-24.6V96c0-27.4-31.9-41.8-52.5-24.6l-192 160c-15.3 12.8-15.3 36.4 0 49.2zm256 0l192 160c20.6 17.2 52.5 2.8 52.5-24.6V96c0-27.4-31.9-41.8-52.5-24.6l-192 160c-15.3 12.8-15.3 36.4 0 49.2z"
+                />
+              </svg>
             </button>
             <h2 className="header-text">Your Playlists</h2>
             <button onClick={this.moveSliderRight} className="move-slider">
-              <img id="rotate" src={arrow} />
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                data-prefix="fas"
+                data-icon="forward"
+                class="svg-inline--fa fa-forward fa-w-16"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M500.5 231.4l-192-160C287.9 54.3 256 68.6 256 96v320c0 27.4 31.9 41.8 52.5 24.6l192-160c15.3-12.8 15.3-36.4 0-49.2zm-256 0l-192-160C31.9 54.3 0 68.6 0 96v320c0 27.4 31.9 41.8 52.5 24.6l192-160c15.3-12.8 15.3-36.4 0-49.2z"
+                />
+              </svg>
             </button>
           </div>
+        ) : (
+          <h2 className="header-text">Log in first</h2>
         )}
         <section className="slider-container">
           <div style={{ left: "0px" }} className="playlist-slider">
@@ -150,7 +181,9 @@ class App extends Component {
               ))}
           </div>
         </section>
-        <h2 className="header-text">Recently played</h2>
+        {this.state.recentlyPlayed && (
+          <h2 className="header-text">Recently played</h2>
+        )}
         <main>
           {this.state.recentlyPlayed &&
             this.withoutDuplicates().map(item => (
