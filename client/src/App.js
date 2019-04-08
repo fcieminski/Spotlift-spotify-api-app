@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import arrowNext from "./img/forward.svg";
-import arrowBack from "./img/backward.svg";
-
-const server = "http://localhost:8888/";
+import { StyledNav, StyledButton, PlaylistImg, PlaylistBox } from "./styled.js";
 
 class App extends Component {
   state = {
@@ -115,11 +112,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <nav>
+        <StyledNav>
           <a href="http://localhost:8888/login">
-            <button>Log in with Spotify</button>
+            <StyledButton> Log in with Spotify </StyledButton>
           </a>
-        </nav>
+        </StyledNav>
         {this.state.playlists ? (
           <div className="slider-controls">
             <button onClick={this.moveSliderLeft} className="move-slider">
@@ -128,7 +125,7 @@ class App extends Component {
                 focusable="false"
                 data-prefix="fas"
                 data-icon="backward"
-                class="svg-inline--fa fa-backward fa-w-16"
+                className="svg-inline--fa fa-backward fa-w-16"
                 role="img"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
@@ -146,7 +143,7 @@ class App extends Component {
                 focusable="false"
                 data-prefix="fas"
                 data-icon="forward"
-                class="svg-inline--fa fa-forward fa-w-16"
+                className="svg-inline--fa fa-forward fa-w-16"
                 role="img"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
@@ -165,11 +162,15 @@ class App extends Component {
           <div style={{ left: "0px" }} className="playlist-slider">
             {this.state.playlists &&
               this.state.playlists.map(playlist => (
-                <div className="playlist-box">
+                <PlaylistBox
+                  className="playlist-box"
+                  id={playlist.id}
+                  key={playlist.id}
+                >
                   <a href={Object.values(playlist.external_urls)[0]}>
-                    <div className="playlist-image">
+                    <PlaylistImg>
                       <img src={playlist.images[0].url} />
-                    </div>
+                    </PlaylistImg>
                   </a>
                   <div className="playlist-info">
                     <a href={Object.values(playlist.external_urls)[0]}>
@@ -177,7 +178,7 @@ class App extends Component {
                     </a>
                     <h2>{playlist.owner.display_name}</h2>
                   </div>
-                </div>
+                </PlaylistBox>
               ))}
           </div>
         </section>

@@ -31,21 +31,6 @@ code {
     monospace;
 }
 
-nav {
-  width: 300px;
-  height: 10%;
-  background-color: white;
-  border-bottom-right-radius: 50px;
-}
-nav > a > button {
-  width: 200px;
-  height: 30px;
-  border: none;
-  border-radius: 10px;
-  margin: 20px;
-  border: 2px solid rgb(144, 144, 144);
-  background-color: transparent;
-}
 section {
   position: relative;
   height: 250px;
@@ -60,10 +45,6 @@ section {
   height: 33px;
   cursor: pointer;
   background-color: transparent;
-}
-
-#rotate {
-  transform: rotate(180deg);
 }
 
 .slider-controls {
@@ -88,28 +69,6 @@ section {
   display: flex;
 }
 
-.playlist-box {
-  width: 250px;
-  height: 250px;
-  margin: 10px;
-}
-
-.playlist-image {
-  position: relative;
-}
-
-.playlist-image::after {
-  content: " ";
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 0;
-  height: 250px;
-  transition: all 0.5s;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.404), rgba(0, 0, 0, 0.404));
-}
-
 .playlist-image > img {
   width: 100%;
 }
@@ -120,15 +79,6 @@ section {
   left: 0;
   text-align: center;
   visibility: hidden;
-}
-
-.playlist-box:hover .playlist-image::after {
-  transition: all 0.5s;
-  width: 250px;
-}
-
-.playlist-box:hover .playlist-info {
-  visibility: visible;
 }
 
 .playlist-info > a,
