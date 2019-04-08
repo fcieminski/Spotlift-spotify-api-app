@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import "./App.css";
-import { StyledNav, StyledButton, PlaylistImg, PlaylistBox } from "./styled.js";
+import {
+  StyledNav,
+  StyledButton,
+  PlaylistImg,
+  PlaylistBox,
+  RecentlyPlayed
+} from "./styled.js";
 
 class App extends Component {
   state = {
@@ -188,7 +194,8 @@ class App extends Component {
         <main>
           {this.state.recentlyPlayed &&
             this.withoutDuplicates().map(item => (
-              <div className="recently-played-container">
+              // <div className="recently-played-container">
+              <RecentlyPlayed>
                 <div className="recently-played-imagebox">
                   <h2>{item.track.album.name}</h2>
                   <img src={item.track.album.images[1].url} />
@@ -204,7 +211,8 @@ class App extends Component {
                     autostart="false"
                   />
                 </audio>
-              </div>
+              </RecentlyPlayed>
+              // </div>
             ))}
         </main>
       </div>

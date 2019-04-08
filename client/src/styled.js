@@ -56,3 +56,22 @@ export const PlaylistBox = styled.div`
     visibility: visible;
   }
 `;
+
+export const RecentlyPlayed = styled.div`
+  transition: all 0.2s;
+  background-color: rgb(238, 238, 238);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 10px;
+  border: 1px solid rgb(221, 221, 221);
+  box-shadow: 5px 2px 11px -8px rgba(0, 0, 0, 0.75);
+  border-radius: 5px;
+  max-width: 340px;
+  width: 100%;
+  &:hover {
+    background-color: rgb(206, 206, 206);
+  }
+`;

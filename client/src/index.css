@@ -102,7 +102,7 @@ main {
   margin: 0 auto;
 }
 
-.recently-played-container {
+/* .recently-played-container {
   transition: all 0.2s;
   background-color: rgb(238, 238, 238);
   display: flex;
@@ -120,7 +120,7 @@ main {
 
 .recently-played-container:hover {
   background-color: rgb(206, 206, 206);
-}
+} */
 
 .recently-played-imagebox {
   display: flex;
