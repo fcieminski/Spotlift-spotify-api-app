@@ -1,16 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import Root from "./Root/Root";
 import AuthContext from "./context/AuthContext";
 
 ReactDOM.render(
   <AuthContext>
-    <Root>
-      <App />
-    </Root>
+    <Root />
   </AuthContext>,
   document.getElementById("root")
 );

@@ -33,7 +33,7 @@ export const PlaylistImg = styled.div`
     left: 0;
     display: block;
     width: 0;
-    height: 150px;
+    height: 200px;
     transition: all 0.5s;
     background-image: linear-gradient(
       rgba(0, 0, 0, 0.404),
@@ -43,12 +43,13 @@ export const PlaylistImg = styled.div`
 `;
 
 export const PlaylistBox = styled.div`
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
+  margin: 5px;
   &:hover ${PlaylistImg} {
     &::after {
       transition: all 0.5s;
-      width: 150px;
+      width: 200px;
     }
   }
   &:hover .playlist-info {
@@ -94,4 +95,7 @@ export const GridNav = styled.nav``;
 export const PlaylistContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 1050px;
+  width: 100%;
 `;

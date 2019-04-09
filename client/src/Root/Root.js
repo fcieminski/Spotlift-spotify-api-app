@@ -6,6 +6,7 @@ import Playlist from "../Playlist/Playlist";
 import PlaylistScreen from "../PlaylistScreen/PlaylistScreen";
 import { withAuth } from "../context/AuthContext";
 import { StyledNav, StyledButton } from "../styled";
+import MainMenu from "../MainMenu";
 
 class Root extends Component {
   render() {
