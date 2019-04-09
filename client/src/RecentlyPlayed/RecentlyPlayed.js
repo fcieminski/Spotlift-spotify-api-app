@@ -28,11 +28,11 @@ class RecentlyPlayed extends Component {
             />
             <div className="recently-played-about">
               <div>
-                <h2>Album: {item.track.album.name}</h2>
                 <h2>
-                  Artist: {item.track.artists.map(artist => `${artist.name} `)}
+                  {item.track.artists.map(artist => `${artist.name}`)}:{" "}
+                  {item.track.name}
                 </h2>
-                <p>Title: {item.track.name}</p>
+                <p>Album: {item.track.album.name}</p>
                 <audio
                   className="player-audio"
                   src={item.track.preview_url}

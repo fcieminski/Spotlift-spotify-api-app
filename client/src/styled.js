@@ -68,6 +68,7 @@ export const RecentlyPlayedBox = styled.div`
   margin-bottom: 10px;
   &:hover {
     background-color: rgb(206, 206, 206);
+    transform: translateY(5px);
   }
 `;
 
