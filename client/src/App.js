@@ -5,7 +5,7 @@ import {
   StyledButton,
   PlaylistImg,
   PlaylistBox,
-  RecentlyPlayed
+  RecentlyPlayedBox
 } from "./styled.js";
 
 class App extends Component {
@@ -194,7 +194,7 @@ class App extends Component {
         <main>
           {this.state.recentlyPlayed &&
             this.withoutDuplicates().map(item => (
-              <RecentlyPlayed>
+              <RecentlyPlayedBox>
                 <div className="recently-played-imagebox">
                   <h2>{item.track.album.name}</h2>
                   <img src={item.track.album.images[1].url} />
@@ -210,7 +210,7 @@ class App extends Component {
                     autostart="false"
                   />
                 </audio>
-              </RecentlyPlayed>
+              </RecentlyPlayedBox>
             ))}
         </main>
       </div>

@@ -33,7 +33,7 @@ export const PlaylistImg = styled.div`
     left: 0;
     display: block;
     width: 0;
-    height: 250px;
+    height: 150px;
     transition: all 0.5s;
     background-image: linear-gradient(
       rgba(0, 0, 0, 0.404),
@@ -43,13 +43,12 @@ export const PlaylistImg = styled.div`
 `;
 
 export const PlaylistBox = styled.div`
-  width: 250px;
-  height: 250px;
-  margin: 10px;
+  width: 150px;
+  height: 150px;
   &:hover ${PlaylistImg} {
     &::after {
       transition: all 0.5s;
-      width: 250px;
+      width: 150px;
     }
   }
   &:hover .playlist-info {
@@ -57,7 +56,7 @@ export const PlaylistBox = styled.div`
   }
 `;
 
-export const RecentlyPlayed = styled.div`
+export const RecentlyPlayedBox = styled.div`
   transition: all 0.2s;
   background-color: rgb(238, 238, 238);
   display: flex;
@@ -74,4 +73,28 @@ export const RecentlyPlayed = styled.div`
   &:hover {
     background-color: rgb(206, 206, 206);
   }
+`;
+
+export const Layout = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto 100px;
+  height: 100vh;
+`;
+
+export const GridSection = styled.div`
+  grid-row: 2;
+  grid-column: 1 / 6;
+`;
+
+export const GridMain = styled.div`
+  grid-column: 2 / 6;
+  overflow: auto;
+`;
+
+export const GridNav = styled.nav``;
+
+export const PlaylistContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
 `;
