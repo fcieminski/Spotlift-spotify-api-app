@@ -194,7 +194,6 @@ class App extends Component {
         <main>
           {this.state.recentlyPlayed &&
             this.withoutDuplicates().map(item => (
-              // <div className="recently-played-container">
               <RecentlyPlayed>
                 <div className="recently-played-imagebox">
                   <h2>{item.track.album.name}</h2>
@@ -212,7 +211,6 @@ class App extends Component {
                   />
                 </audio>
               </RecentlyPlayed>
-              // </div>
             ))}
         </main>
       </div>
