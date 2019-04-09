@@ -3,26 +3,49 @@ import { withAuth } from "../context/AuthContext";
 import { RecentlyPlayedBox } from "../styled";
 
 class RecentlyPlayed extends Component {
+  state = {
+    isPlaying: false
+  };
+
+  handleClick(playerId, event) {
+    const players = document.querySelectorAll(".player-audio");
+    let newArr = Array.from(players);
+    let currentPlayer = newArr.filter(player => player.id === playerId);
+    this.state.isPlaying ? currentPlayer[0].pause() : currentPlayer[0].play();
+    this.setState({
+      isPlaying: !this.state.isPlaying
+    });
+  }
+
   render() {
     return (
-      <div>
+      <div className="recently-played-container">
         {this.props.authContext.withoutDuplicates().map(item => (
           <RecentlyPlayedBox>
-            <div className="recently-played-imagebox">
-              <h2>{item.track.album.name}</h2>
-              <img src={item.track.album.images[1].url} />
-            </div>
+            <img
+              className="recently-played-img"
+              src={item.track.album.images[1].url}
+            />
             <div className="recently-played-about">
-              <h2>{item.track.artists.map(artist => `${artist.name} `)}</h2>
-              <p>{item.track.name}</p>
+              <div>
+                <h2>Album: {item.track.album.name}</h2>
+                <h2>
+                  Artist: {item.track.artists.map(artist => `${artist.name} `)}
+                </h2>
+                <p>Title: {item.track.name}</p>
+                <audio
+                  className="player-audio"
+                  src={item.track.preview_url}
+                  id={item.track.id}
+                />
+              </div>
+              <button
+                className="btn"
+                onClick={e => this.handleClick(item.track.id, e)}
+              >
+                {this.state.isPlaying ? "PAUSE" : "PLAY"}
+              </button>
             </div>
-            <audio src={item.track.preview_url} controls>
-              <embed
-                src={item.track.preview_url}
-                loop="false"
-                autostart="false"
-              />
-            </audio>
           </RecentlyPlayedBox>
         ))}
       </div>

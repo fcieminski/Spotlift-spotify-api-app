@@ -102,30 +102,47 @@ main {
   margin: 0 auto;
 }
 
-.recently-played-imagebox {
+.recently-played-img {
+  position: relative;
+  width: 200px;
+  padding-right: 15px;
+  border-right: 2px solid rgb(228, 228, 228);
+}
+
+.recently-played-about {
   display: flex;
-  flex-direction: column;
-}
-
-.recently-played-imagebox > img {
-  border: 1px solid rgb(221, 221, 221);
-}
-
-.recently-played-imagebox > h2 {
-  margin-bottom: 10px;
-}
-
-.recently-played-about > h2 {
-  font-size: 16px;
-  margin: 10px 0 10px 0;
-}
-
-.recently-played-about > p {
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-audio {
-  margin-bottom: 10px;
+  justify-content: space-between;
   width: 100%;
+  margin-left: 50px;
+  align-items: center;
+}
+
+.recently-played-about > div > h2 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.recently-played-about > div > p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.recently-played-container {
+  margin: 10px;
+}
+
+.btn {
+  transition: all 0.2s;
+  width: 200px;
+  height: 30px;
+  margin-right: 10px;
+  background-color: transparent;
+  border: 2px solid rgb(189, 189, 189);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  color: white;
+  background-color: #282828;
 }

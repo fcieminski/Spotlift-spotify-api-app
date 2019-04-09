@@ -8,10 +8,13 @@ export default class AuthContextProvider extends Component {
     playlists: null,
     recentlyPlayed: null,
     withoutDuplicates: () => {
-      return this.state.recentlyPlayed.filter(
-        (element, index, self) =>
-          self.map(item => item.track.name).indexOf(element.track.name) ===
-          index
+      return (
+        this.state.recentlyPlayed &&
+        this.state.recentlyPlayed.filter(
+          (element, index, self) =>
+            self.map(item => item.track.name).indexOf(element.track.name) ===
+            index
+        )
       );
     }
   };
