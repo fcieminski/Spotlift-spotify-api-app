@@ -1,20 +1,25 @@
 import styled from "styled-components";
 
-export const StyledNav = styled.nav`
-  width: 300px;
-  height: 10%;
-  background-color: white;
-  border-bottom-right-radius: 50px;
+export const StyledNav = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const StyledButton = styled.button`
-  width: 200px;
-  height: 30px;
+transition: all 0.3s
+cursor: pointer;
+  width: 250px;
+  height: 70px;
   border: none;
   border-radius: 10px;
   margin: 20px;
-  border: 2px solid rgb(144, 144, 144);
-  background-color: transparent;
+  background-color: white;
+  font-size: 1.2rem;
+  &:hover{
+    background-color: rgb(101, 101, 251);
+  }
 `;
 
 export const StyledSection = styled.section`
@@ -46,9 +51,10 @@ export const PlaylistBox = styled.div`
   width: 200px;
   height: 200px;
   margin: 5px;
+  position: relative;
   &:hover ${PlaylistImg} {
     &::after {
-      transition: all 0.5s;
+      transition: all 0.2s;
       width: 200px;
     }
   }
@@ -83,6 +89,7 @@ export const Layout = styled.div`
 export const GridSection = styled.div`
   grid-row: 2;
   grid-column: 1 / 6;
+  border-top: 2px solid #515151;
 `;
 
 export const GridMain = styled.div`
@@ -90,7 +97,10 @@ export const GridMain = styled.div`
   overflow: auto;
 `;
 
-export const GridNav = styled.nav``;
+export const GridNav = styled.nav`
+  overflow: auto;
+  border-right: 1px solid #515151;
+`;
 
 export const PlaylistContainer = styled.div`
   display: flex;
