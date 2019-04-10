@@ -1,20 +1,25 @@
 import styled from "styled-components";
 
-export const StyledNav = styled.nav`
-  width: 300px;
-  height: 10%;
-  background-color: white;
-  border-bottom-right-radius: 50px;
+export const StyledNav = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const StyledButton = styled.button`
-  width: 200px;
-  height: 30px;
+transition: all 0.3s
+cursor: pointer;
+  width: 250px;
+  height: 70px;
   border: none;
   border-radius: 10px;
   margin: 20px;
-  border: 2px solid rgb(144, 144, 144);
-  background-color: transparent;
+  background-color: white;
+  font-size: 1.2rem;
+  &:hover{
+    background-color: rgb(101, 101, 251);
+  }
 `;
 
 export const StyledSection = styled.section`
