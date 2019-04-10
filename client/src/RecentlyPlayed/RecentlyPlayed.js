@@ -19,36 +19,39 @@ class RecentlyPlayed extends Component {
 
   render() {
     return (
-      <div className="recently-played-container">
-        {this.props.authContext.withoutDuplicates() &&
-          this.props.authContext.withoutDuplicates().map(item => (
-            <RecentlyPlayedBox>
-              <img
-                className="recently-played-img"
-                src={item.track.album.images[1].url}
-              />
-              <div className="recently-played-about">
-                <div>
-                  <h2>
-                    {item.track.artists.map(artist => `${artist.name}`)}:{" "}
-                    {item.track.name}
-                  </h2>
-                  <p>Album: {item.track.album.name}</p>
-                  <audio
-                    className="player-audio"
-                    src={item.track.preview_url}
-                    id={item.track.id}
-                  />
+      <div>
+        <h2 className="recently-played-info">Your recently played tracks</h2>
+        <div className="recently-played-container">
+          {this.props.authContext.withoutDuplicates() &&
+            this.props.authContext.withoutDuplicates().map(item => (
+              <RecentlyPlayedBox>
+                <img
+                  className="recently-played-img"
+                  src={item.track.album.images[1].url}
+                />
+                <div className="recently-played-about">
+                  <div>
+                    <h2>
+                      {item.track.artists.map(artist => `${artist.name}`)}:{" "}
+                      {item.track.name}
+                    </h2>
+                    <p>Album: {item.track.album.name}</p>
+                    <audio
+                      className="player-audio"
+                      src={item.track.preview_url}
+                      id={item.track.id}
+                    />
+                  </div>
+                  <button
+                    className="btn"
+                    onClick={e => this.handleClick(item.track.id, e)}
+                  >
+                    {this.state.isPlaying ? "PAUSE" : "PLAY"}
+                  </button>
                 </div>
-                <button
-                  className="btn"
-                  onClick={e => this.handleClick(item.track.id, e)}
-                >
-                  {this.state.isPlaying ? "PAUSE" : "PLAY"}
-                </button>
-              </div>
-            </RecentlyPlayedBox>
-          ))}
+              </RecentlyPlayedBox>
+            ))}
+        </div>
       </div>
     );
   }

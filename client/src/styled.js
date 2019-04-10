@@ -46,9 +46,10 @@ export const PlaylistBox = styled.div`
   width: 200px;
   height: 200px;
   margin: 5px;
+  position: relative;
   &:hover ${PlaylistImg} {
     &::after {
-      transition: all 0.5s;
+      transition: all 0.2s;
       width: 200px;
     }
   }
@@ -83,6 +84,7 @@ export const Layout = styled.div`
 export const GridSection = styled.div`
   grid-row: 2;
   grid-column: 1 / 6;
+  border-top: 2px solid #515151;
 `;
 
 export const GridMain = styled.div`
@@ -90,7 +92,10 @@ export const GridMain = styled.div`
   overflow: auto;
 `;
 
-export const GridNav = styled.nav``;
+export const GridNav = styled.nav`
+  overflow: auto;
+  border-right: 1px solid #515151;
+`;
 
 export const PlaylistContainer = styled.div`
   display: flex;

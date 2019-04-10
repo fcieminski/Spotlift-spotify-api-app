@@ -74,8 +74,14 @@ section {
 }
 
 .playlist-info {
-  position: relative;
-  top: -150px;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   left: 0;
   text-align: center;
   visibility: hidden;
@@ -83,6 +89,7 @@ section {
 
 .playlist-info > a,
 .playlist-info > h2 {
+  font-size: 0.8rem;
   color: white;
   text-decoration: none;
 }
@@ -100,6 +107,14 @@ main {
   justify-content: space-evenly;
   max-width: 1100px;
   margin: 0 auto;
+}
+
+.recently-played-info {
+  font-size: 2rem;
+  color: white;
+  margin: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid white;
 }
 
 .recently-played-img {
@@ -129,7 +144,7 @@ main {
 }
 
 .recently-played-container {
-  margin: 10px;
+  margin: 30px;
 }
 
 .btn {
@@ -147,4 +162,39 @@ main {
 .btn:hover {
   color: white;
   background-color: #282828;
+}
+
+li {
+  list-style: none;
+  line-height: 15px;
+  padding-bottom: 10px;
+}
+ul {
+  padding: 0;
+  margin: 10px;
+}
+.side-menu-container {
+}
+
+.side-menu-container > ul > li,
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.3rem;
+}
+.nested-ul {
+  padding-top: 5px;
+  padding-left: 5px;
+}
+.nested-ul > li > a {
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: white;
+}
+
+.nested-ul > li > a:hover {
+  color: rgb(101, 101, 251);
+}
+
+.playlists-ul-menu {
 }

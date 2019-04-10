@@ -44,10 +44,8 @@ class Root extends Component {
               </StyledNav>
             )}
           </GridMain>
-          <GridSection style={{ border: "5px solid orange" }}>
-            <div>
-              <h1>Hello</h1>
-            </div>
+          <GridSection>
+            <p>Spotify@WebApi</p>
           </GridSection>
         </Router>
       </Layout>
