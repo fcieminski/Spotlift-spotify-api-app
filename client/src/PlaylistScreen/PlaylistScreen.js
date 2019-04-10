@@ -4,18 +4,73 @@ import { withAuth } from "../context/AuthContext";
 class PlaylistScreen extends Component {
   state = {
     playlists: [],
-    tracksUrl: "",
-    tracks: []
+    tracks: "",
+    playlist: [],
+    currentTracks: []
   };
 
   componentDidMount() {
-    this.setState({
-      playlists: this.props.authContext.playlists
-    });
+    this.setState(
+      {
+        playlists: this.props.authContext.playlists,
+        tracks: this.props.authContext.playlists.map(
+          playlist => playlist.tracks.href
+        )
+      },
+      () => {
+        const playlistId = this.props.match.params.playlistId;
+        const playlist = this.state.playlists.find(
+          playlist => playlist.id === playlistId
+        );
+        const tracks = playlist && Object.values(playlist.tracks)[0];
+        this.setState(
+          {
+            playlist,
+            tracks
+          },
+          this.getTracks()
+        );
+      }
+    );
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (
+      state.playlist.id &&
+      props.match.params.playlistId !== state.playlist.id
+    ) {
+      const playlistId = props.match.params.playlistId;
+      const playlist = state.playlists.find(
+        playlist => playlist.id === playlistId
+      );
+      const tracks = playlist && Object.values(playlist.tracks)[0];
+      return {
+        tracks,
+        playlist
+      };
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.tracks !== this.state.tracks) {
+      console.log("component update!");
+      fetch(`${this.state.tracks}`, {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + this.props.authContext.token
+        }
+      })
+        .then(response => response.json())
+        .then(data =>
+          this.setState({
+            currentTracks: data.items
+          })
+        );
+    }
   }
 
   getTracks = () => {
-    fetch(`${this.state.tracksUrl}`, {
+    fetch(`${this.state.tracks[0]}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + this.props.authContext.token
@@ -24,7 +79,7 @@ class PlaylistScreen extends Component {
       .then(response => response.json())
       .then(data =>
         this.setState({
-          tracks: data.items
+          currentTracks: data.items
         })
       );
   };
@@ -34,7 +89,6 @@ class PlaylistScreen extends Component {
     const playlist = this.state.playlists.find(
       playlist => playlist.id === playlistId
     );
-    const tracks = playlist && Object.values(playlist.tracks)[0];
     return (
       <>
         {playlist && (
@@ -49,18 +103,6 @@ class PlaylistScreen extends Component {
               </div>
             </div>
             <div>
-              <button
-                onClick={() =>
-                  this.setState(
-                    {
-                      tracksUrl: tracks
-                    },
-                    this.getTracks()
-                  )
-                }
-              >
-                Show tracks
-              </button>
               <table>
                 <thead>
                   <tr>
@@ -70,8 +112,8 @@ class PlaylistScreen extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.tracks &&
-                    this.state.tracks.map(track => (
+                  {this.state.currentTracks &&
+                    this.state.currentTracks.map(track => (
                       <tr>
                         <td>{track.track.name}</td>
                         <td>{track.track.duration_ms}</td>
