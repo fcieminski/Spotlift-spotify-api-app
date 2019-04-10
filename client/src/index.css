@@ -198,3 +198,44 @@ a {
 
 .playlists-ul-menu {
 }
+
+.current-playlist-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.current-playlist-info {
+}
+
+.current-playlist-info > img {
+  width: 100%;
+  max-width: 300px;
+}
+
+.table-tracks {
+  color: white;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.7rem;
+}
+
+.table-tracks td,
+.table-tracks th {
+  border: 1px solid #ddd;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.table-tracks tr:hover {
+  color: black;
+  background-color: rgb(101, 101, 251);
+}
+
+.table-tracks th {
+  text-align: left;
+  background-color: rgb(27, 27, 27);
+  color: white;
+}

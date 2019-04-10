@@ -92,8 +92,8 @@ class PlaylistScreen extends Component {
     return (
       <>
         {playlist && (
-          <div>
-            <div>
+          <div className="current-playlist-container">
+            <div className="current-playlist-info">
               <img src={playlist.images[0].url} />
               <div>
                 <a href={Object.values(playlist.external_urls)[0]}>
@@ -103,7 +103,7 @@ class PlaylistScreen extends Component {
               </div>
             </div>
             <div>
-              <table>
+              <table className="table-tracks">
                 <thead>
                   <tr>
                     <th>Track name</th>
