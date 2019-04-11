@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { withAuth } from "../context/AuthContext";
+import { IoIosLink, IoIosMusicalNote } from "react-icons/io";
 
 class PlaylistScreen extends Component {
   state = {
     playlists: [],
     tracks: "",
     playlist: [],
-    currentTracks: []
+    currentTracks: [],
+    isLoadingData: false,
+    errorMessage: ""
   };
 
   componentDidMount() {
@@ -26,7 +29,8 @@ class PlaylistScreen extends Component {
         this.setState(
           {
             playlist,
-            tracks
+            tracks,
+            isLoadingData: true
           },
           this.getTracks()
         );
@@ -63,9 +67,11 @@ class PlaylistScreen extends Component {
         .then(response => response.json())
         .then(data =>
           this.setState({
-            currentTracks: data.items
+            currentTracks: data.items,
+            isLoadingData: false
           })
-        );
+        )
+        .catch(error => console.log(error.message));
     }
   }
 
@@ -79,9 +85,11 @@ class PlaylistScreen extends Component {
       .then(response => response.json())
       .then(data =>
         this.setState({
-          currentTracks: data.items
+          currentTracks: data.items,
+          isLoadingData: false
         })
-      );
+      )
+      .catch(error => console.log(error.message));
   };
 
   render() {
@@ -95,33 +103,50 @@ class PlaylistScreen extends Component {
           <div className="current-playlist-container">
             <div className="current-playlist-info">
               <img src={playlist.images[0].url} />
-              <div>
+              <div className="current-playlist-about">
                 <a href={Object.values(playlist.external_urls)[0]}>
+                  <IoIosMusicalNote style={{ verticalAlign: "sub" }} />
                   {playlist.name}
                 </a>
-                {playlist.owner.display_name}
+                <p>{playlist.owner.display_name}</p>
               </div>
             </div>
             <div>
-              <table className="table-tracks">
-                <thead>
-                  <tr>
-                    <th>Track name</th>
-                    <th>Track duration</th>
-                    <th>Track url</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.currentTracks &&
-                    this.state.currentTracks.map(track => (
-                      <tr>
-                        <td>{track.track.name}</td>
-                        <td>{track.track.duration_ms}</td>
-                        <td>{track.track.external_urls.spotify}</td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
+              {this.state.isLoadingData ? (
+                <h1>Loading data...</h1>
+              ) : (
+                <table className="table-tracks">
+                  <thead>
+                    <tr>
+                      <th>Track name</th>
+                      <th>Track duration</th>
+                      <th>Track url</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.state.currentTracks &&
+                      this.state.currentTracks.map(track => (
+                        <tr>
+                          <td>{track.track.name}</td>
+                          <td>
+                            {`${Math.floor(track.track.duration_ms / 60000)}:${(
+                              (track.track.duration_ms % 60000) /
+                              1000
+                            ).toFixed(0)}`}
+                          </td>
+                          <td>
+                            <a
+                              className="btn-url"
+                              href={track.track.external_urls.spotify}
+                            >
+                              <IoIosLink style={{ verticalAlign: "sub" }} />
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              )}
             </div>
           </div>
         )}

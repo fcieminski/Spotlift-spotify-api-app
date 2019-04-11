@@ -79,6 +79,7 @@ app.get("/callback", function(req, res) {
 
         res.redirect(
           local_host_app +
+            "?" +
             querystring.stringify({
               access_token: access_token,
               refresh_token: refresh_token

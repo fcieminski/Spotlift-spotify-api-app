@@ -1,26 +1,19 @@
 import React, { Component } from "react";
 import { withAuth } from "../context/AuthContext";
 import { RecentlyPlayedBox } from "../styled";
+import ReactAudioPlayer from "react-audio-player";
+import { IoIosFastforward } from "react-icons/io";
 
 class RecentlyPlayed extends Component {
-  state = {
-    isPlaying: false
-  };
-
-  handleClick(playerId, event) {
-    const players = document.querySelectorAll(".player-audio");
-    let newArr = Array.from(players);
-    let currentPlayer = newArr.filter(player => player.id === playerId);
-    this.state.isPlaying ? currentPlayer[0].pause() : currentPlayer[0].play();
-    this.setState({
-      isPlaying: !this.state.isPlaying
-    });
-  }
-
   render() {
     return (
       <div>
-        <h2 className="recently-played-info">Your recently played tracks</h2>
+        <h2 className="recently-played-info">
+          <IoIosFastforward
+            style={{ verticalAlign: "sub", marginRight: "5px" }}
+          />
+          Your recently played tracks
+        </h2>
         <div className="recently-played-container">
           {this.props.authContext.withoutDuplicates() &&
             this.props.authContext.withoutDuplicates().map(item => (
@@ -36,18 +29,13 @@ class RecentlyPlayed extends Component {
                       {item.track.name}
                     </h2>
                     <p>Album: {item.track.album.name}</p>
-                    <audio
-                      className="player-audio"
-                      src={item.track.preview_url}
-                      id={item.track.id}
-                    />
                   </div>
-                  <button
-                    className="btn"
-                    onClick={e => this.handleClick(item.track.id, e)}
-                  >
-                    {this.state.isPlaying ? "PAUSE" : "PLAY"}
-                  </button>
+                  <ReactAudioPlayer
+                    className="player-audio"
+                    src={item.track.preview_url}
+                    id={item.track.id}
+                    controls
+                  />
                 </div>
               </RecentlyPlayedBox>
             ))}

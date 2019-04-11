@@ -6,17 +6,22 @@ class MainMenu extends Component {
   render() {
     return (
       <div className="side-menu-container">
-        <ul>
+        <ul className="menu">
           <li>
             <NavLink exact to="/">
               Home
             </NavLink>
           </li>
-          {/* <li>
+          <li>
             <NavLink exact to="/playlist">
               Playlists
             </NavLink>
-          </li> */}
+          </li>
+          <li>
+            <NavLink exact to="/recently">
+              Recently played
+            </NavLink>
+          </li>
         </ul>
         <ul className="playlists-ul-menu">
           <li>
