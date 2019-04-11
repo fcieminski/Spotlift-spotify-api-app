@@ -13,6 +13,9 @@ import {
   GridMain,
   GridNav
 } from "../styled";
+import SpotifyLogoGreen from "../img/Spotify_Logo_RGB_Green.png";
+import SpotifyLogoWhite from "../img/Spotify_Logo_RGB_White.png";
+import { IoIosHeart } from "react-icons/io";
 
 import MainMenu from "../MainMenu";
 
@@ -39,13 +42,34 @@ class Root extends Component {
             ) : (
               <StyledNav>
                 <a href="http://localhost:8888/login">
-                  <StyledButton> Log in with Spotify </StyledButton>
+                  <StyledButton>
+                    {" "}
+                    Log in with{" "}
+                    <img
+                      style={{
+                        width: "170px",
+                        verticalAlign: "middle",
+                        marginLeft: "10px"
+                      }}
+                      src={SpotifyLogoGreen}
+                    />{" "}
+                  </StyledButton>
                 </a>
               </StyledNav>
             )}
           </GridMain>
           <GridSection>
-            <p>Spotify@WebApi</p>
+            <h2 className="footer-info">
+              Made with{" "}
+              <IoIosHeart
+                style={{
+                  verticalAlign: "middle",
+                  marginLeft: "10px",
+                  marginRight: "10px"
+                }}
+              />{" "}
+              using <img src={SpotifyLogoWhite} /> API
+            </h2>
           </GridSection>
         </Router>
       </Layout>

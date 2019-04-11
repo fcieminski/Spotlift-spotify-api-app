@@ -1,34 +1,37 @@
 import React, { Component } from "react";
 import { PlaylistImg, PlaylistBox, PlaylistContainer } from "../styled";
 import { withAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
+import { IoIosMusicalNotes } from "react-icons/io";
 
 class Playlist extends Component {
-  state = {};
-
   render() {
     return (
       <div>
-        <h2 className="recently-played-info">Your playlists</h2>
+        <h2 className="recently-played-info">
+          <IoIosMusicalNotes
+            style={{ verticalAlign: "sub", marginRight: "5px" }}
+          />
+          Your playlists
+        </h2>
         <PlaylistContainer>
           {this.props.authContext.playlists &&
             this.props.authContext.playlists.map(playlist => (
-              <PlaylistBox
-                className="playlist-box"
-                id={playlist.id}
-                key={playlist.id}
-              >
-                <a href={Object.values(playlist.external_urls)[0]}>
+              <Link to={`/playlist/${playlist.id}`}>
+                <PlaylistBox
+                  className="playlist-box"
+                  id={playlist.id}
+                  key={playlist.id}
+                >
                   <PlaylistImg>
                     <img src={playlist.images[0].url} />
                   </PlaylistImg>
-                </a>
-                <div className="playlist-info">
-                  <a href={Object.values(playlist.external_urls)[0]}>
-                    {playlist.name}
-                  </a>
-                  <h2>{playlist.owner.display_name}</h2>
-                </div>
-              </PlaylistBox>
+                  <div className="playlist-info">
+                    <p>{playlist.name}</p>
+                    <h2>{playlist.owner.display_name}</h2>
+                  </div>
+                </PlaylistBox>
+              </Link>
             ))}
         </PlaylistContainer>
       </div>

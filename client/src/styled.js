@@ -10,8 +10,8 @@ export const StyledNav = styled.div`
 export const StyledButton = styled.button`
 transition: all 0.3s
 cursor: pointer;
-  width: 250px;
-  height: 70px;
+width: 328px;
+height: 100px;
   border: none;
   border-radius: 10px;
   margin: 20px;
@@ -86,7 +86,7 @@ export const Layout = styled.div`
   height: 100vh;
 `;
 
-export const GridSection = styled.div`
+export const GridSection = styled.footer`
   grid-row: 2;
   grid-column: 1 / 6;
   border-top: 2px solid #515151;
@@ -99,13 +99,11 @@ export const GridMain = styled.div`
 
 export const GridNav = styled.nav`
   overflow: auto;
-  border-right: 1px solid #515151;
+  box-shadow: -23px -25px 5px 23px rgba(0, 0, 0, 0.75);
 `;
 
 export const PlaylistContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 0 auto;
-  max-width: 1050px;
-  width: 100%;
+  margin: 20px;
 `;

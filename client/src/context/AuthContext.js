@@ -20,7 +20,7 @@ export default class AuthContextProvider extends Component {
   };
 
   getSpotifyToken = () => {
-    const fragment = window.location.pathname;
+    const fragment = window.location.search;
     if (fragment) {
       const match = fragment.match(/access_token=(.*)[(^&)]/);
       const refreshMatch = fragment.match(/refresh_token=(.*)/);
