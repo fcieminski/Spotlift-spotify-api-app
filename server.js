@@ -5,8 +5,8 @@ let querystring = require("querystring");
 let cookieParser = require("cookie-parser");
 let client_id = "d4f76ce0e8fe4aa6a762e15aadf3a5d6";
 let client_secret = "0008bacd11bc43f8a67b0226be685e44";
-let redirect_uri = "http://localhost:8888/callback";
-let local_host_app = "http://localhost:3000/";
+let redirect_uri = "https://netlify-backend.herokuapp.com/callback";
+let local_host_app = "https://spotlift.netlify.com/";
 
 let generateRandomString = function(length) {
   let text = "";

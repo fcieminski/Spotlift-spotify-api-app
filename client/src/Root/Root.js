@@ -41,7 +41,7 @@ class Root extends Component {
               </>
             ) : (
               <StyledNav>
-                <a href="http://localhost:8888/login">
+                <a href="https://netlify-backend.herokuapp.com/login">
                   <StyledButton>
                     {" "}
                     Log in with{" "}
