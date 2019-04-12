@@ -6,7 +6,7 @@ import { IoIosFastforward } from "react-icons/io";
 
 class RecentlyPlayed extends Component {
   render() {
-    const { withoutDuplicates } = this.props.authContext;
+    const { withoutDuplicates, error } = this.props.authContext;
     return (
       <div>
         <h2 className="recently-played-info">
@@ -16,6 +16,7 @@ class RecentlyPlayed extends Component {
           Your recently played tracks
         </h2>
         <div className="recently-played-container">
+          {error && <h1>{error}</h1>}
           {withoutDuplicates() &&
             withoutDuplicates().map(item => (
               <RecentlyPlayedBox>
