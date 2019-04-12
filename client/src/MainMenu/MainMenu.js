@@ -4,6 +4,7 @@ import { withAuth } from "../context/AuthContext";
 
 class MainMenu extends Component {
   render() {
+    const { playlists } = this.props.authContext;
     return (
       <div className="side-menu-container">
         <ul className="menu">
@@ -32,8 +33,8 @@ class MainMenu extends Component {
           <li>
             Playlists
             <ul className="nested-ul">
-              {this.props.authContext.playlists &&
-                this.props.authContext.playlists.map(playlist => (
+              {playlists &&
+                playlists.map(playlist => (
                   <li>
                     <Link exact to={`/playlist/${playlist.id}`}>
                       {playlist.name}

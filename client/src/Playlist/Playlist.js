@@ -6,6 +6,7 @@ import { IoIosMusicalNotes } from "react-icons/io";
 
 class Playlist extends Component {
   render() {
+    const { playlists } = this.props.authContext;
     return (
       <div>
         <h2 className="recently-played-info">
@@ -15,8 +16,8 @@ class Playlist extends Component {
           Your playlists
         </h2>
         <PlaylistContainer>
-          {this.props.authContext.playlists &&
-            this.props.authContext.playlists.map(playlist => (
+          {playlists &&
+            playlists.map(playlist => (
               <Link to={`/playlist/${playlist.id}`}>
                 <PlaylistBox
                   className="playlist-box"

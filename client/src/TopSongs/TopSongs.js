@@ -4,18 +4,8 @@ import { IoIosMusicalNote } from "react-icons/io";
 import { RecentlyPlayedBox } from "../styled";
 
 class TopSongs extends Component {
-  shareMessenger = () => {
-    const link = "https://open.spotify.com/album/34OgX0UTWfVQtXHIntUsLT";
-    const app_id = "314035112596219";
-    window.open(
-      "fb-messenger://share?link=" +
-        encodeURIComponent(link) +
-        "&app_id=" +
-        encodeURIComponent(app_id)
-    );
-  };
-
   render() {
+    const { topSongs } = this.props.authContext;
     return (
       <div>
         <h2 className="recently-played-info">
@@ -25,8 +15,8 @@ class TopSongs extends Component {
           Your top songs
         </h2>
         <div className="recently-played-container">
-          {this.props.authContext.topSongs &&
-            this.props.authContext.topSongs.map(item => (
+          {topSongs &&
+            topSongs.map(item => (
               <RecentlyPlayedBox>
                 <img
                   className="recently-played-img"

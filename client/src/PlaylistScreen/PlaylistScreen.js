@@ -97,6 +97,7 @@ class PlaylistScreen extends Component {
     const playlist = this.state.playlists.find(
       playlist => playlist.id === playlistId
     );
+    const { currentTracks, isLoadingData } = this.state;
     return (
       <>
         {playlist && (
@@ -112,7 +113,7 @@ class PlaylistScreen extends Component {
               </div>
             </div>
             <div>
-              {this.state.isLoadingData ? (
+              {isLoadingData ? (
                 <h1>Loading data...</h1>
               ) : (
                 <table className="table-tracks">
@@ -124,8 +125,8 @@ class PlaylistScreen extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {this.state.currentTracks &&
-                      this.state.currentTracks.map(track => (
+                    {currentTracks &&
+                      currentTracks.map(track => (
                         <tr>
                           <td>{track.track.name}</td>
                           <td>
