@@ -22,6 +22,11 @@ class MainMenu extends Component {
               Recently played
             </NavLink>
           </li>
+          <li>
+            <NavLink exact to="/topsongs">
+              Top songs
+            </NavLink>
+          </li>
         </ul>
         <ul className="playlists-ul-menu">
           <li>
