@@ -64,10 +64,21 @@ export default class AuthContextProvider extends Component {
         Authorization: "Bearer " + token
       }
     })
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Błąd!");
+        }
+      })
       .then(data =>
         this.setState({
           recentlyPlayed: data.items
+        })
+      )
+      .catch(error =>
+        this.setState({
+          error: error.message
         })
       );
     fetch("https://api.spotify.com/v1/me/playlists", {
@@ -76,10 +87,21 @@ export default class AuthContextProvider extends Component {
         Authorization: "Bearer " + token
       }
     })
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Błąd!");
+        }
+      })
       .then(data =>
         this.setState({
           playlists: data.items
+        })
+      )
+      .catch(error =>
+        this.setState({
+          error: error.message
         })
       );
     fetch("https://api.spotify.com/v1/me/top/tracks", {
