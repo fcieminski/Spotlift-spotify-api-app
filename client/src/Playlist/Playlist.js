@@ -16,7 +16,7 @@ class Playlist extends Component {
           Your playlists
         </h2>
         <PlaylistContainer>
-          {playlists &&
+          {playlists ? (
             playlists.map(playlist => (
               <Link to={`/playlist/${playlist.id}`}>
                 <PlaylistBox
@@ -33,7 +33,10 @@ class Playlist extends Component {
                   </div>
                 </PlaylistBox>
               </Link>
-            ))}
+            ))
+          ) : (
+            <h2>You have no playlists</h2>
+          )}
         </PlaylistContainer>
       </div>
     );

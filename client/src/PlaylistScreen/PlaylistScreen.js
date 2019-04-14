@@ -57,7 +57,6 @@ class PlaylistScreen extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.tracks !== this.state.tracks) {
-      console.log("component update!");
       fetch(`${this.state.tracks}`, {
         method: "GET",
         headers: {
@@ -138,6 +137,7 @@ class PlaylistScreen extends Component {
                           <td>
                             <a
                               className="btn-url"
+                              target="_blank"
                               href={track.track.external_urls.spotify}
                             >
                               <IoIosLink style={{ verticalAlign: "sub" }} />

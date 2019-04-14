@@ -1,12 +1,38 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { withAuth } from "../context/AuthContext";
+import { IoIosMenu } from "react-icons/io";
 
 class MainMenu extends Component {
+  handleClick(event) {
+    event.stopPropagation();
+    let iconMenu = document.querySelector("#menu-icon");
+    let menuMobile = document.querySelector(".menu");
+    if (event.target === iconMenu) {
+      menuMobile.classList.contains("menu_mobile")
+        ? menuMobile.classList.remove("menu_mobile")
+        : menuMobile.classList.add("menu_mobile");
+    }
+  }
+  toggleMenu = event => {
+    event.stopPropagation();
+    let menuMobile = document.querySelector(".menu");
+    menuMobile.classList.remove("menu_mobile");
+  };
+
+  componentDidMount() {
+    window.addEventListener("click", this.toggleMenu);
+  }
+
   render() {
     const { playlists } = this.props.authContext;
     return (
       <div className="side-menu-container">
+        <IoIosMenu
+          onClick={this.handleClick}
+          id="menu-icon"
+          className="mobile-menu-icon"
+        />
         <ul className="menu">
           <li>
             <NavLink exact to="/">

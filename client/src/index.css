@@ -274,3 +274,86 @@ tr > td:first-of-type {
   color: black;
   font-size: 1rem;
 }
+
+.mobile-menu-icon {
+  display: none;
+}
+
+@media (max-width: 830px) {
+  .mobile-menu-icon {
+    display: block;
+    color: white;
+    font-size: 2rem;
+    margin: 15px;
+  }
+  .side-menu-container {
+    margin-top: 0;
+  }
+  .menu {
+    display: none;
+  }
+  .playlists-ul-menu {
+    display: none;
+  }
+  .menu_mobile {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    background-color: #282828;
+    width: 100%;
+    margin: 0;
+    padding-top: 20px;
+    box-shadow: -1px 200px 87px 69px rgba(0, 0, 0, 0.75);
+  }
+  .menu_mobile > li {
+    margin-bottom: 30px;
+    text-align: center;
+    padding: 0;
+  }
+  .playlist-info > p {
+    font-size: 0.8rem;
+  }
+  .recently-played-info {
+    font-size: 1.5rem;
+  }
+  .recently-played-container {
+    margin: 10px;
+  }
+  .recently-played-about {
+    margin: 0;
+    flex-direction: column;
+    text-align: center;
+  }
+  .recently-played-about > div > h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .recently-played-about > div {
+    margin-bottom: 10px;
+  }
+  .album-link {
+    margin-bottom: 10px;
+  }
+  .player-audio {
+    margin-top: 10px;
+    margin-right: 0px;
+    margin-bottom: 10px;
+  }
+  .recently-played-img {
+    padding: 0;
+    margin-top: 10px;
+  }
+  .footer-info {
+    margin: 10px;
+    font-size: 0.7rem;
+  }
+  .current-playlist-info > img {
+    width: 50%;
+  }
+  .current-playlist-about > a {
+    font-size: 1rem;
+  }
+  .current-playlist-about > p {
+    font-size: 1rem;
+  }
+}

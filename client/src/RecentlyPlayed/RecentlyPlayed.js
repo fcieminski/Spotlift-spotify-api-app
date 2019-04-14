@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withAuth } from "../context/AuthContext";
 import { RecentlyPlayedBox } from "../styled";
 import ReactAudioPlayer from "react-audio-player";
-import { IoIosFastforward } from "react-icons/io";
+import { IoIosFastforward, IoIosMusicalNote } from "react-icons/io";
 
 class RecentlyPlayed extends Component {
   render() {
@@ -30,7 +30,14 @@ class RecentlyPlayed extends Component {
                       {item.track.artists.map(artist => `${artist.name}`)}:{" "}
                       {item.track.name}
                     </h2>
-                    <p>Album: {item.track.album.name}</p>
+                    <a
+                      className="album-link"
+                      target="_blank"
+                      href={Object.values(item.track.external_urls)[0]}
+                    >
+                      <IoIosMusicalNote style={{ verticalAlign: "sub" }} />
+                      Album: {item.track.album.name}
+                    </a>
                   </div>
                   <ReactAudioPlayer
                     className="player-audio"
