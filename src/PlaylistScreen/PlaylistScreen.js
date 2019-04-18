@@ -57,7 +57,6 @@ class PlaylistScreen extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.tracks !== this.state.tracks) {
-      console.log("component update!");
       fetch(`${this.state.tracks}`, {
         method: "GET",
         headers: {
@@ -97,6 +96,7 @@ class PlaylistScreen extends Component {
     const playlist = this.state.playlists.find(
       playlist => playlist.id === playlistId
     );
+    const { currentTracks, isLoadingData } = this.state;
     return (
       <>
         {playlist && (
@@ -112,7 +112,7 @@ class PlaylistScreen extends Component {
               </div>
             </div>
             <div>
-              {this.state.isLoadingData ? (
+              {isLoadingData ? (
                 <h1>Loading data...</h1>
               ) : (
                 <table className="table-tracks">
@@ -124,8 +124,8 @@ class PlaylistScreen extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {this.state.currentTracks &&
-                      this.state.currentTracks.map(track => (
+                    {currentTracks &&
+                      currentTracks.map(track => (
                         <tr>
                           <td>{track.track.name}</td>
                           <td>
@@ -137,6 +137,7 @@ class PlaylistScreen extends Component {
                           <td>
                             <a
                               className="btn-url"
+                              target="_blank"
                               href={track.track.external_urls.spotify}
                             >
                               <IoIosLink style={{ verticalAlign: "sub" }} />

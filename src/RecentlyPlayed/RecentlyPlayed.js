@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { withAuth } from "../context/AuthContext";
 import { RecentlyPlayedBox } from "../styled";
 import ReactAudioPlayer from "react-audio-player";
-import { IoIosFastforward } from "react-icons/io";
+import { IoIosFastforward, IoIosMusicalNote } from "react-icons/io";
 
 class RecentlyPlayed extends Component {
   render() {
+    const { withoutDuplicates, error } = this.props.authContext;
     return (
       <div>
         <h2 className="recently-played-info">
@@ -15,8 +16,9 @@ class RecentlyPlayed extends Component {
           Your recently played tracks
         </h2>
         <div className="recently-played-container">
-          {this.props.authContext.withoutDuplicates() &&
-            this.props.authContext.withoutDuplicates().map(item => (
+          {error && <h1>{error}</h1>}
+          {withoutDuplicates() &&
+            withoutDuplicates().map(item => (
               <RecentlyPlayedBox>
                 <img
                   className="recently-played-img"
@@ -28,7 +30,14 @@ class RecentlyPlayed extends Component {
                       {item.track.artists.map(artist => `${artist.name}`)}:{" "}
                       {item.track.name}
                     </h2>
-                    <p>Album: {item.track.album.name}</p>
+                    <a
+                      className="album-link"
+                      target="_blank"
+                      href={Object.values(item.track.external_urls)[0]}
+                    >
+                      <IoIosMusicalNote style={{ verticalAlign: "sub" }} />
+                      Album: {item.track.album.name}
+                    </a>
                   </div>
                   <ReactAudioPlayer
                     className="player-audio"

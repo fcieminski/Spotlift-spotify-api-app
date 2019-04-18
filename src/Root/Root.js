@@ -18,6 +18,7 @@ import SpotifyLogoWhite from "../img/Spotify_Logo_RGB_White.png";
 import { IoIosHeart } from "react-icons/io";
 
 import MainMenu from "../MainMenu";
+import TopSongs from "../TopSongs/TopSongs";
 
 class Root extends Component {
   render() {
@@ -38,6 +39,7 @@ class Root extends Component {
                   path="/playlist/:playlistId"
                   component={PlaylistScreen}
                 />
+                <Route exact path="/topsongs" component={TopSongs} />
               </>
             ) : (
               <StyledNav>
