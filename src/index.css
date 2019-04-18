@@ -1,0 +1,359 @@
+* {
+  box-sizing: border-box;
+}
+img {
+  max-width: 100%;
+}
+
+h2 {
+  font-size: 13px;
+  margin-bottom: 10px;
+  margin: 0;
+}
+
+p {
+  font-size: 15px;
+}
+
+body {
+  background-color: #282828;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+section {
+  position: relative;
+  height: 250px;
+  margin-bottom: 10vh;
+  overflow: hidden;
+}
+
+.playlist-image > img {
+  width: 100%;
+}
+
+.playlist-info {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  left: 0;
+  text-align: center;
+  visibility: hidden;
+}
+
+.playlist-info > a,
+.playlist-info > h2 {
+  font-size: 0.8rem;
+  color: white;
+  text-decoration: none;
+}
+
+.playlist-info > a {
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+  display: inline-block;
+  border-bottom: 2px solid rgb(216, 216, 216);
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.recently-played-info {
+  font-size: 2rem;
+  color: white;
+  margin: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid white;
+}
+
+.recently-played-img {
+  position: relative;
+  width: 200px;
+  padding-right: 15px;
+  border-right: 2px solid rgb(228, 228, 228);
+}
+
+.recently-played-about {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-left: 50px;
+  align-items: center;
+}
+
+.recently-played-about > div > h2 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.recently-played-about > div > p {
+  font-size: 1rem;
+  margin: 0;
+  margin-top: 10px;
+}
+
+.recently-played-container {
+  margin: 30px;
+}
+
+.player-audio {
+  margin-right: 20px;
+}
+
+.btn {
+  transition: all 0.2s;
+  width: 200px;
+  height: 40px;
+  font-size: 1rem;
+  margin-right: 10%;
+  background-color: transparent;
+  border: 2px solid rgb(189, 189, 189);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  color: white;
+  background-color: #282828;
+}
+
+li {
+  list-style: none;
+  line-height: 15px;
+  padding-bottom: 10px;
+}
+ul {
+  padding: 0;
+  margin: 10px;
+}
+.side-menu-container {
+  margin-top: 35px;
+}
+
+.side-menu-container > ul > li,
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.3rem;
+}
+
+.menu > li {
+  margin-bottom: 20px;
+}
+
+.menu > li > a:hover {
+  color: rgb(101, 101, 251);
+}
+
+.nested-ul {
+  padding-top: 5px;
+  padding-left: 5px;
+}
+.nested-ul > li > a {
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: white;
+}
+
+.nested-ul > li > a:hover {
+  color: rgb(101, 101, 251);
+}
+
+.current-playlist-container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.current-playlist-info {
+  display: flex;
+  align-items: center;
+  box-shadow: 2px 11px 11px -5px rgba(0, 0, 0, 0.75);
+  border-bottom: 1px solid #676767;
+  margin-bottom: 20px;
+  background-color: #474747;
+}
+
+.current-playlist-about > p {
+  font-size: 1.5rem;
+  color: white;
+  margin: 0;
+  padding-bottom: 3px;
+}
+
+.current-playlist-about > a:hover {
+  color: rgb(101, 101, 251);
+}
+
+.current-playlist-about {
+  margin-left: 30px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid;
+}
+
+.current-playlist-info > img {
+  width: 100%;
+  max-width: 300px;
+}
+
+.table-tracks {
+  color: white;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.7rem;
+}
+
+tr > td:first-of-type {
+  width: 80%;
+}
+
+.table-tracks td,
+.table-tracks th {
+  border: 1px solid #ddd;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.table-tracks tr:hover {
+  color: black;
+  background-color: rgb(101, 101, 251);
+}
+
+.table-tracks th {
+  text-align: left;
+  background-color: rgb(27, 27, 27);
+  color: white;
+}
+
+.btn-url {
+  width: 50px;
+  height: 30px;
+  display: block;
+  text-align: center;
+  background-color: #474747;
+}
+
+.footer-info {
+  margin: 30px;
+  font-size: 1rem;
+  color: white;
+  line-height: 36px;
+}
+
+.footer-info img {
+  width: 100px;
+  vertical-align: middle;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.album-link {
+  color: black;
+  font-size: 1rem;
+}
+
+.mobile-menu-icon {
+  display: none;
+}
+
+@media (max-width: 830px) {
+  .mobile-menu-icon {
+    display: block;
+    color: white;
+    font-size: 2rem;
+    margin: 15px;
+  }
+  .side-menu-container {
+    margin-top: 0;
+  }
+  .menu {
+    display: none;
+  }
+  .playlists-ul-menu {
+    display: none;
+  }
+  .menu_mobile {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    background-color: #282828;
+    width: 100%;
+    margin: 0;
+    padding-top: 20px;
+    box-shadow: -1px 200px 87px 69px rgba(0, 0, 0, 0.75);
+  }
+  .menu_mobile > li {
+    margin-bottom: 30px;
+    text-align: center;
+    padding: 0;
+  }
+  .playlist-info > p {
+    font-size: 0.8rem;
+  }
+  .recently-played-info {
+    font-size: 1.5rem;
+  }
+  .recently-played-container {
+    margin: 10px;
+  }
+  .recently-played-about {
+    margin: 0;
+    flex-direction: column;
+    text-align: center;
+  }
+  .recently-played-about > div > h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .recently-played-about > div {
+    margin-bottom: 10px;
+  }
+  .album-link {
+    margin-bottom: 10px;
+  }
+  .player-audio {
+    margin-top: 10px;
+    margin-right: 0px;
+    margin-bottom: 10px;
+  }
+  .recently-played-img {
+    padding: 0;
+    margin-top: 10px;
+  }
+  .footer-info {
+    margin: 10px;
+    font-size: 0.7rem;
+  }
+  .current-playlist-info > img {
+    width: 50%;
+  }
+  .current-playlist-about > a {
+    font-size: 1rem;
+  }
+  .current-playlist-about > p {
+    font-size: 1rem;
+  }
+}
